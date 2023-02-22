@@ -1,7 +1,7 @@
 package co.talesbruno.consumeapifreetogame.ui.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -13,30 +13,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import co.talesbruno.consumeapifreetogame.ui.home.game.GameItem
 import co.talesbruno.consumeapifreetogame.ui.home.menu.DrawerContent
 import co.talesbruno.consumeapifreetogame.ui.home.menu.DrawerHeader
 import co.talesbruno.consumeapifreetogame.ui.home.menu.MenuItem
-import co.talesbruno.consumeapifreetogame.viewmodel.MainViewModel
+import co.talesbruno.consumeapifreetogame.viewmodel.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun Home(
-    mainViewModel: MainViewModel,
+    homeViewModel: HomeViewModel,
     onNavigateToDetailScreen: (Int) -> Unit,
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState
 ){
-
-    val games by mainViewModel.games.collectAsState()
-
-    val errorMessage by mainViewModel.errorMessage.collectAsState()
-
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
+    val games by homeViewModel.gameSate.collectAsState()
 
     Scaffold(
         topBar = {
@@ -76,14 +74,38 @@ fun Home(
             ))
         }
     ) {
-        if (games.isNotEmpty()){
-            LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-                items(games) { game ->
-                    GameItem(game = game, onNavigateToDetailScreen = onNavigateToDetailScreen)
+        when (games){
+            is co.talesbruno.consumeapifreetogame.domain.util.Result.Loading -> Column(
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator()
+            }
+            is co.talesbruno.consumeapifreetogame.domain.util.Result.Success -> LazyColumn(
+                modifier = Modifier.padding(vertical = 4.dp)
+            ) {
+                games.data?.let { gameList ->
+                    items(
+                        items = gameList,
+                        itemContent = {
+                            GameItem(game = it, onNavigateToDetailScreen = onNavigateToDetailScreen)
+                        }
+                    )
                 }
             }
-        }else{
-            Text(text = errorMessage, color = Color.Blue)
+            is co.talesbruno.consumeapifreetogame.domain.util.Result.Error -> Column() {
+                scope.launch{
+                    games.message?.let {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            it,
+                            "Ok",
+                            SnackbarDuration.Long
+                        )
+                    }
+                }
+            }
         }
     }
 }
+

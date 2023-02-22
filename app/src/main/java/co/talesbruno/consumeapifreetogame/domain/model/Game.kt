@@ -1,7 +1,4 @@
-package co.talesbruno.consumeapifreetogame.model
-
-import android.net.Uri
-import retrofit2.http.Url
+package co.talesbruno.consumeapifreetogame.domain.model
 
 data class Game(
     val id: Int,

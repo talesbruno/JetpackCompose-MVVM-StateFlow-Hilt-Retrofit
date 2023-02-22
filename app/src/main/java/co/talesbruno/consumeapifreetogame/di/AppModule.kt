@@ -1,6 +1,6 @@
 package co.talesbruno.consumeapifreetogame.di
 
-import co.talesbruno.consumeapifreetogame.data.FreeToGameApi
+import co.talesbruno.consumeapifreetogame.data.api.FreeToGameApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

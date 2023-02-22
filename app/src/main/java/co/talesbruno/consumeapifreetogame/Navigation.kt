@@ -1,7 +1,8 @@
 package co.talesbruno.consumeapifreetogame
 
-import android.provider.ContactsContract
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,21 +10,27 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import co.talesbruno.consumeapifreetogame.ui.home.Home
 import co.talesbruno.consumeapifreetogame.ui.home.game.GameDetail
-import co.talesbruno.consumeapifreetogame.viewmodel.MainViewModel
+import co.talesbruno.consumeapifreetogame.viewmodel.GameDetailViewModel
+import co.talesbruno.consumeapifreetogame.viewmodel.HomeViewModel
 
 @Composable
 fun Navigation(
-    mainViewModel: MainViewModel
+    homeViewModel: HomeViewModel,
+    gameDetailViewModel: GameDetailViewModel
 ){
     val navController = rememberNavController()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
     
     NavHost(navController = navController, startDestination = "home"){
         composable("home"){
             Home(
-                mainViewModel = mainViewModel,
+                homeViewModel = homeViewModel,
                 onNavigateToDetailScreen = { gameId ->
                     navController.navigate("detail/$gameId")
-                }
+                },
+                scope = scope,
+                scaffoldState = scaffoldState
             )
         }
         composable("about"){
@@ -35,7 +42,13 @@ fun Navigation(
         ){ backStackEntry ->
             val gameId = backStackEntry.arguments?.getInt("gameId")
             requireNotNull(gameId)
-            GameDetail(mainViewModel = mainViewModel, gameId = gameId, navController = navController)
+            GameDetail(
+                gameDetailViewModel = gameDetailViewModel,
+                gameId = gameId,
+                navController = navController,
+                scope = scope,
+                scaffoldState = scaffoldState
+            )
         }
     }
 }

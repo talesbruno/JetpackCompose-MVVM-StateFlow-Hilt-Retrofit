@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.model
+package co.talesbruno.consumeapifreetogame.domain.model
 
 data class GameDetail(
     val description: String,
