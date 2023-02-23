@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.ui.home.game
+package co.talesbruno.consumeapifreetogame.presentation.ui.home.game
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -13,8 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import co.talesbruno.consumeapifreetogame.viewmodel.GameDetailViewModel
-import co.talesbruno.consumeapifreetogame.viewmodel.HomeViewModel
+import co.talesbruno.consumeapifreetogame.presentation.viewmodel.GameDetailViewModel
 import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

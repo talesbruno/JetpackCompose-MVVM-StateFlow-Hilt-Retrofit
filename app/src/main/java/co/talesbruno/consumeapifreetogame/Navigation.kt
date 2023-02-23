@@ -8,22 +8,22 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import co.talesbruno.consumeapifreetogame.ui.home.Home
-import co.talesbruno.consumeapifreetogame.ui.home.game.GameDetail
-import co.talesbruno.consumeapifreetogame.viewmodel.GameDetailViewModel
-import co.talesbruno.consumeapifreetogame.viewmodel.HomeViewModel
+import co.talesbruno.consumeapifreetogame.presentation.ui.home.Home
+import co.talesbruno.consumeapifreetogame.presentation.ui.home.game.GameDetail
+import co.talesbruno.consumeapifreetogame.presentation.viewmodel.GameDetailViewModel
+import co.talesbruno.consumeapifreetogame.presentation.viewmodel.HomeViewModel
 
 @Composable
 fun Navigation(
     homeViewModel: HomeViewModel,
     gameDetailViewModel: GameDetailViewModel
-){
+) {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    
-    NavHost(navController = navController, startDestination = "home"){
-        composable("home"){
+
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
             Home(
                 homeViewModel = homeViewModel,
                 onNavigateToDetailScreen = { gameId ->
@@ -33,13 +33,13 @@ fun Navigation(
                 scaffoldState = scaffoldState
             )
         }
-        composable("about"){
+        composable("about") {
 
         }
         composable(
             "detail/{gameId}",
             arguments = listOf(navArgument("gameId") { type = NavType.IntType })
-        ){ backStackEntry ->
+        ) { backStackEntry ->
             val gameId = backStackEntry.arguments?.getInt("gameId")
             requireNotNull(gameId)
             GameDetail(

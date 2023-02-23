@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.ui.home.game
+package co.talesbruno.consumeapifreetogame.presentation.ui.home.game
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

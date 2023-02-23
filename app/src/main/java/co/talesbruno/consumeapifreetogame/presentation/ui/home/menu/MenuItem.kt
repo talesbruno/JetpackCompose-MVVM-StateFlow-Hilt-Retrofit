@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.ui.home.menu
+package co.talesbruno.consumeapifreetogame.presentation.ui.home.menu
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

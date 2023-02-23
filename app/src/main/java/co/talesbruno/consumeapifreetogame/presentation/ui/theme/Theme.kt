@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.ui.theme
+package co.talesbruno.consumeapifreetogame.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

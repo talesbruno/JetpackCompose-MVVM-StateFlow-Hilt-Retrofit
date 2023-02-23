@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.ui.theme
+package co.talesbruno.consumeapifreetogame.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

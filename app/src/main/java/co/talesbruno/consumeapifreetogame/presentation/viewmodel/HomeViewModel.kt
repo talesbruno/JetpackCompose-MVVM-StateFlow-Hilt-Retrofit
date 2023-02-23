@@ -1,4 +1,4 @@
-package co.talesbruno.consumeapifreetogame.viewmodel
+package co.talesbruno.consumeapifreetogame.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllGamesUseCase: GetAllGamesUseCase
-) : ViewModel(){
+) : ViewModel() {
 
     private val _gamesState = MutableStateFlow<Result<List<Game>>>(Result.Loading())
     val gameSate: StateFlow<Result<List<Game>>> = _gamesState

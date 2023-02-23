@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import co.talesbruno.consumeapifreetogame.ui.theme.ConsumeApiFreeToGameTheme
-import co.talesbruno.consumeapifreetogame.viewmodel.GameDetailViewModel
-import co.talesbruno.consumeapifreetogame.viewmodel.HomeViewModel
+import co.talesbruno.consumeapifreetogame.presentation.ui.theme.ConsumeApiFreeToGameTheme
+import co.talesbruno.consumeapifreetogame.presentation.viewmodel.GameDetailViewModel
+import co.talesbruno.consumeapifreetogame.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

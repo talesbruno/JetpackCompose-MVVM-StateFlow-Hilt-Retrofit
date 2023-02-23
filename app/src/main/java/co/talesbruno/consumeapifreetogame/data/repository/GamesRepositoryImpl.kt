@@ -7,7 +7,9 @@ import co.talesbruno.consumeapifreetogame.domain.util.Result
 import retrofit2.Response
 import javax.inject.Inject
 
-class GamesRepositoryImpl @Inject constructor(private val freeToGameApi: FreeToGameApi) : co.talesbruno.consumeapifreetogame.domain.repository.GamesRepository {
+class GamesRepositoryImpl @Inject constructor(
+    private val freeToGameApi: FreeToGameApi
+) : co.talesbruno.consumeapifreetogame.domain.repository.GamesRepository {
 
     override suspend fun getAllGames(): Result<List<Game>> {
         val response = freeToGameApi.findAllGames()
